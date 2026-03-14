@@ -1,0 +1,11 @@
+[project]
+name = "the-archer"
+version = "0.1.0"
+description = "Helping me automate my shopping list"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
