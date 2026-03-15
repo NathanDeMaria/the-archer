@@ -4,8 +4,24 @@ version = "0.1.0"
 description = "Helping me automate my shopping list"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "endgame-aws",
+    "matplotlib>=3.10.8",
+    "pandas[pyarrow]>=3.0.1",
+    "scikit-learn>=1.8.0",
+    "tqdm>=4.67.3",
+]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.6",
+    "ty>=0.0.23",
+    "ipykernel>=7.2.0",
+]
+
+[tool.uv.sources]
+endgame-aws = { git = "https://github.com/NathanDeMaria/EndGame.git", subdirectory = "py-endgame-aws", rev = "fa71020e5f77362b9199de06d649cfe68f2369ae" }
