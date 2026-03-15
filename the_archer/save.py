@@ -1,5 +1,4 @@
 from collections.abc import AsyncIterator
-from pathlib import Path
 import warnings
 
 import pandas as pd
@@ -7,8 +6,7 @@ from endgame_aws import get_pbp_store, read_seasons, Config
 from endgame.types import Season
 from endgame.ncaabb import NcaabbGender
 
-
-_DATA_DIR = Path(__file__).parent / "data"
+from .constants import get_data_dir
 
 
 async def save_pbp_dfs(league: NcaabbGender) -> None:
@@ -43,7 +41,7 @@ def _save_month_dfs(league: NcaabbGender, month_dfs: list[pd.DataFrame]) -> None
                 )
             }
         )
-    league_dir = _DATA_DIR / league.name
+    league_dir = get_data_dir(league)
     league_dir.mkdir(exist_ok=True, parents=True)
     month_df.to_parquet(league_dir / f"{month}.parquet")
 

@@ -25,3 +25,9 @@ dev = [
 
 [tool.uv.sources]
 endgame-aws = { git = "https://github.com/NathanDeMaria/EndGame.git", subdirectory = "py-endgame-aws", rev = "fa71020e5f77362b9199de06d649cfe68f2369ae" }
+
+[tool.ruff]
+exclude = ["sandbox.ipynb"]
+
+[tool.ty.src]
+exclude = ["sandbox.ipynb"]
