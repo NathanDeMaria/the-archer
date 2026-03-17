@@ -43,7 +43,7 @@ def _read_real_shots(path) -> pd.DataFrame:
     return real_shots[~real_shots.game_id.isin(game_ids_to_drop)]
 
 
-def build_shot_model(league: NcaabbGender) -> _ShotModel:
+def build_shot_model(league: NcaabbGender) -> ShotModel:
     data_root = get_data_dir(league)
     parquets = list(data_root.glob("*.parquet"))
     grids = MakeGrid()
@@ -51,10 +51,10 @@ def build_shot_model(league: NcaabbGender) -> _ShotModel:
         real_shots = _read_real_shots(path)
         grids.add_shot_df(real_shots)
     jump_shot_model = _build_model(grids)
-    return _ShotModel(jump_shot_model, grids.special_probs)
+    return ShotModel(jump_shot_model, grids.special_probs)
 
 
-class _ShotModel:
+class ShotModel:
     def __init__(self, jump_shot: Pipeline, special_types: dict[str, float]):
         self._jump_shot = jump_shot
         self._special_types = special_types
@@ -64,9 +64,10 @@ class _ShotModel:
         is_special = df[Cols.SHOT_TYPE].isin(self._special_types.keys())
 
         distances = np.linalg.norm(df[[Cols.X, Cols.Y]].values, axis=-1)[~is_special]
-        outputs[~is_special] = self._jump_shot.predict_proba(distances)[:, 1]
+        X = distances[:, np.newaxis]
+        outputs[~is_special] = self._jump_shot.predict_proba(X)[:, 1]
 
-        for shot_type, make_prob in self._special_types:
+        for shot_type, make_prob in self._special_types.items():
             outputs[df[Cols.SHOT_TYPE] == shot_type] = make_prob
         return outputs
 
