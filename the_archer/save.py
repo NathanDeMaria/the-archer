@@ -47,7 +47,7 @@ def _save_month_dfs(league: NcaabbGender, month_dfs: list[pd.DataFrame]) -> None
 
 
 async def _load_pbp_dfs(league: NcaabbGender) -> AsyncIterator[pd.DataFrame]:
-    seasons = [season async for season in _read_all_seasons(league)]
+    seasons = [season async for season in read_all_seasons(league)]
     games = {
         game.game_id: game
         for season in seasons
@@ -72,7 +72,7 @@ async def _load_pbp_dfs(league: NcaabbGender) -> AsyncIterator[pd.DataFrame]:
                 )
 
 
-async def _read_all_seasons(gender: NcaabbGender) -> AsyncIterator[Season]:
+async def read_all_seasons(gender: NcaabbGender) -> AsyncIterator[Season]:
     # TODO: check S3 instead of this hard-coded start/end
     for year in range(2010, 2026):
         seasons = await read_seasons(

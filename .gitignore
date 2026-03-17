@@ -3,3 +3,5 @@
 
 *.parquet
 sandbox.ipynb
+*.png
+*.json

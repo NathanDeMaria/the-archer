@@ -6,8 +6,10 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "endgame-aws",
+    "fire>=0.7.1",
     "matplotlib>=3.10.8",
     "pandas[pyarrow]>=3.0.1",
+    "plotly>=6.6.0",
     "scikit-learn>=1.8.0",
     "tqdm>=4.67.3",
 ]
@@ -21,6 +23,7 @@ dev = [
     "ruff>=0.15.6",
     "ty>=0.0.23",
     "ipykernel>=7.2.0",
+    "nbformat>=5.10.4",
 ]
 
 [tool.uv.sources]
