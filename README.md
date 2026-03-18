@@ -9,3 +9,5 @@ Read basketball play-by-play data. First use case: shot probability model.
 1. Build the model for the league
     - `uv run python cli.py save-shot-model --league=mens`
 1. Use the model to get this season's shooting ratings in [`team_shooting_ratings.ipynb`](./team_shooting_ratings.ipynb)
+
+Check out the display [here](https://nathandemaria.github.io/the-archer/mens_profile.html)
